@@ -27,18 +27,13 @@ jobs:
     - name: 'Restore packages'
       run: dotnet restore ${{ env.PROJECT_PATH }}
 
-    - name: 'Get version without v'
-      id: version
-      run: echo "::set-output name=version::${GITHUB_REF#refs/tags/v}"
-
     - name: 'Build project'
       run: dotnet build ${{ env.PROJECT_PATH }} --no-restore --configuration Release
 
     - name: 'Pack project'
-      run: dotnet pack ${{ env.PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=${{ steps.version.outputs.version }} --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
-      env:
-        PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}
-        PROJECT_PATH: 'ReverieCore/ReverieCore.csproj'
+      run: |
+        version=$(echo "${{ github.ref }}" | sed 's/v//')
+        dotnet pack ${{ env.PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=$version --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
 
     - name: 'Push package'
-      run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s ${{ env.NUGET_SOURCE_URL }} --skip-duplicate
+      run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}/*.nupkg -k ${{ env.NUGET_API_KEY }} -s ${{ env.NUGET_SOURCE_URL }} --skip-duplicate
