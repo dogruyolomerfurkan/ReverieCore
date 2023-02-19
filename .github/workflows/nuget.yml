@@ -1,4 +1,4 @@
-name: NuGet
+name: NuGet package
 
 on:
   push:
@@ -6,13 +6,14 @@ on:
       - master
 
 jobs:
-  build:
-    runs-on: windows-latest
+  build-and-publish:
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-    - name: Set up .NET Core
+    - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '7.0.x'
@@ -22,9 +23,9 @@ jobs:
 
     - name: Update version number
       id: version
-      run: echo ::set-output name=version::1.0.$(date +%s)
+      run: echo 1.0.$(date +%s)
 
-    - name: Build and pack NuGet package
+    - name: Build NuGet package
       run: dotnet pack -c Release /p:PackageVersion=${{ steps.version.outputs.version }} ReverieCore.csproj
 
     - name: Publish NuGet package
