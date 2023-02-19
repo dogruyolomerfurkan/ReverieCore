@@ -1,8 +1,8 @@
-﻿using ReverieCore.ExceptionHandler.Authorization;
+﻿using Microsoft.AspNetCore.Mvc;
+using ReverieCore.ExceptionHandler.Authorization;
 using ReverieCore.ExceptionHandler.Business;
 using ReverieCore.ExceptionHandler.Internal;
 using ReverieCore.ExceptionHandler.Validation;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ReverieCore.ExceptionHandler;
 
