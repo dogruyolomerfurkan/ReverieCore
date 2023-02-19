@@ -32,7 +32,7 @@ jobs:
 
     - name: 'Pack project'
       run: |
-        version=$(echo "${{ github.ref }}" | sed 's/v//')
+        version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')
         dotnet pack ${{ env.PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=$version --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
 
     - name: 'Push package'
