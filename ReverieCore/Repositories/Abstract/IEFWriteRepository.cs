@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Query;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using ReverieCore.Entities;
 using System.Linq.Expressions;
 
@@ -6,6 +7,7 @@ namespace ReverieCore.Repositories.Abstract;
 
 public interface IEFWriteRepository<T, TId> : IEFRepository<T, TId> where T : BaseEntity<TId>, new()
 {
+    DbContext Context { get; }
     void Add(T entity);
     Task AddAsync(T entity);
     void AddRange(IEnumerable<T> entities);

@@ -17,6 +17,8 @@ public class EFWriteRepository<T, TId> : IEFWriteRepository<T, TId> where T : Ba
         _entity = dbContext.Set<T>();
     }
 
+    public DbContext Context => _dbContext;
+
     public DbSet<T> Entity => _entity;
 
     public void Add(T entity) => _entity.Add(entity);

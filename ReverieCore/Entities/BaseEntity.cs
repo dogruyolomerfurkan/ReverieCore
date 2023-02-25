@@ -6,6 +6,6 @@ public class BaseEntity<TId>
 {
     public TId Id { get; set; } = default!;
     public Status Status { get; set; }
-    public DateTime CreateDate { get; set; }
-    public DateTime UpdateDate { get; set; }
+    public DateTimeOffset CreateDate { get; set; } = DateTime.UtcNow;
+    public DateTimeOffset UpdateDate { get; set; } = DateTime.UtcNow;
 }
