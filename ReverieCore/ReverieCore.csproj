@@ -4,6 +4,13 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<PackageId>ReverieCore</PackageId>
+	<Version>1.0.5</Version>
+	<Authors>Ömer Furkan Doğruyol</Authors>
+	<Company>Reverie</Company>
+	<Description>
+			Sample Core Project for Base Entities and Repository Pattern in EntityFrameworkCore
+	</Description>
   </PropertyGroup>
 
   <ItemGroup>
